@@ -60,7 +60,9 @@ ________________________________________________________________________________
 
 Links: 
 
+Conversão de Temperatura:
 https://www.google.com/search?q=1+-+Converter+temperatura+(Celsius+%E2%86%94+Fahrenheit)+linguagem+c&oq=1+-+Converter+temperatura+(Celsius+%E2%86%94+Fahrenheit)+linguagem+c&gs_lcrp=EgZjaHJvbWUyBggAEEUYOTIHCAEQIRifBdIBCTM5MzFqMGoxNagCCLACAfEFu7S8qOK0m_g&sourceid=chrome&ie=UTF-8#fpstate=ive&vld=cid:8bfdc806,vid:wUA6q-gnWC0,st:0
 
+Repositório: https://gist.github.com/Windemberg/7bafa79906d3aca03dc52f39c030fa5e
 
-https://gist.github.com/Windemberg/7bafa79906d3aca03dc52f39c030fa5e
+Contar tamanho de caracteres: https://www.google.com/search?q=Contar+o+tamanho+de+uma+frase+linguagem+c&oq=Contar+o+tamanho+de+uma+frase+linguagem+c&gs_lcrp=EgZjaHJvbWUqBggAEEUYOzIGCAAQRRg7MgcIARAAGO8FMgcIAhAAGO8FMgcIAxAAGO8FMgcIBBAAGO8FMgcIBRAAGO8F0gEIMjczNWowajeoAgCwAgA&sourceid=chrome&ie=UTF-8#fpstate=ive&vld=cid:b3682b6d,vid:ttWbcamLer0,st:0
