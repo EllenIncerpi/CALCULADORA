@@ -55,3 +55,12 @@ espaços, se desejar).
 O programa solicita um texto e verifica se ele é um palíndromo (ignorar espaços e diferenciação
 entre maiúsculas/minúsculas).
 A função deve mostrar uma frase avisando se o texto é ou não um palíndromo.
+
+__________________________________________________________________________________________________
+
+Links: 
+
+https://www.google.com/search?q=1+-+Converter+temperatura+(Celsius+%E2%86%94+Fahrenheit)+linguagem+c&oq=1+-+Converter+temperatura+(Celsius+%E2%86%94+Fahrenheit)+linguagem+c&gs_lcrp=EgZjaHJvbWUyBggAEEUYOTIHCAEQIRifBdIBCTM5MzFqMGoxNagCCLACAfEFu7S8qOK0m_g&sourceid=chrome&ie=UTF-8#fpstate=ive&vld=cid:8bfdc806,vid:wUA6q-gnWC0,st:0
+
+
+https://gist.github.com/Windemberg/7bafa79906d3aca03dc52f39c030fa5e
