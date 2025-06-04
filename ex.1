@@ -1,0 +1,126 @@
+#include <stdio.h>   // Para funções de entrada/saída como printf, scanf, getchar
+#include <string.h>  // Para funções de string como strlen (ainda usado em strlen)
+
+// --- Funções Auxiliares ---
+
+// Limpa o buffer do teclado
+void limpar_buffer() {
+    int c;
+    while ((c = getchar()) != '\n' && c != EOF);
+}
+
+// Exibe a mensagem de pausa
+void pausar() {
+    printf("Pressione ENTER para continuar...\n");
+    limpar_buffer();
+}
+
+// Definindo a estrutura Aluno (SEM typedef)
+struct Aluno {
+    char nome[50];
+    int matricula;
+    float notas[3]; // notas[0] = N1, notas[1] = N2, notas[2] = N3
+    float media;
+};
+
+// Protótipos das funções
+void cadastrarAlunos(struct Aluno alunos[], int numAlunos);
+void calcularMedia(struct Aluno *aluno);
+void exibirListas(const struct Aluno alunos[], int numAlunos);
+
+int main() {
+    int numAlunos;
+    struct Aluno turma[10];
+
+    printf("--- Sistema de Notas ---\n");
+
+    do {
+        printf("Quantos alunos deseja cadastrar? (maximo eh 10) ");
+        if (scanf("%d", &numAlunos) != 1) {
+            printf("Entrada invalida. Por favor, digite um numero.\n");
+            limpar_buffer();
+            numAlunos = -1;
+            continue;
+        }
+        limpar_buffer();
+
+        if (numAlunos <= 0 || numAlunos > 10) {
+            printf("Numero de alunos invalido. Por favor, digite um valor entre 1 e 10.\n");
+        }
+    } while (numAlunos <= 0 || numAlunos > 10);
+
+    // Chama a função para cadastrar os alunos
+    cadastrarAlunos(turma, numAlunos);
+
+    // Exibe as listas de aprovados, exame e reprovados
+    exibirListas(turma, numAlunos);
+
+    return 0;
+}
+
+// Função para entrada de dados dos alunos
+void cadastrarAlunos(struct Aluno alunos[], int numAlunos) {
+    for (int i = 0; i < numAlunos; i++) {
+        printf("\n--- Cadastro do Aluno %d ---\n", i + 1);
+
+        printf("Nome: ");
+        fgets(alunos[i].nome, sizeof(alunos[i].nome), stdin);
+        // --- Removendo o '\n' diretamente aqui ---
+        int j = 0;
+        while (alunos[i].nome[j] != '\0') {
+            if (alunos[i].nome[j] == '\n') {
+                alunos[i].nome[j] = '\0';
+                break;
+            }
+            j++;
+        }
+        // --- Fim da remoção direta ---
+
+        printf("Matricula: ");
+        while (scanf("%d", &alunos[i].matricula) != 1) {
+            printf("Entrada invalida. Digite um numero para a matricula: ");
+            limpar_buffer();
+        }
+        limpar_buffer();
+
+        printf("Notas (N1 N2 N3, separadas por espaco): ");
+        while (scanf("%f %f %f", &alunos[i].notas[0], &alunos[i].notas[1], &alunos[i].notas[2]) != 3) {
+            printf("Entrada invalida. Digite as tres notas separadas por espaco: ");
+            limpar_buffer();
+        }
+        limpar_buffer();
+
+        // Calcula a média do aluno imediatamente após a entrada das notas
+        calcularMedia(&alunos[i]);
+    }
+}
+
+// Função para cálculo da média
+void calcularMedia(struct Aluno *aluno) {
+    aluno->media = (aluno->notas[0] * 0.30) +
+                   (aluno->notas[1] * 0.30) +
+                   (aluno->notas[2] * 0.40);
+}
+
+// Função para exibição das listas
+void exibirListas(const struct Aluno alunos[], int numAlunos) {
+    const char *categorias[] = {"Aprovados", "Exame", "Reprovados"};
+    float limites_min[] = {7.0, 4.0, 0.0};
+    float limites_max[] = {10.1, 7.0, 4.0};
+
+    for (int c = 0; c < 3; c++) {
+        printf("\n--- %s ---\n", categorias[c]);
+        int encontrouAluno = 0;
+        for (int i = 0; i < numAlunos; i++) {
+            if (alunos[i].media >= limites_min[c] && alunos[i].media < limites_max[c]) {
+                printf("%s (%d) - Media: %.2f\n", alunos[i].nome, alunos[i].matricula, alunos[i].media);
+                encontrouAluno = 1;
+            }
+        }
+        if (!encontrouAluno) {
+            if (c == 0) printf("Nenhum aluno aprovado.\n");
+            else if (c == 1) printf("Nenhum aluno de exame.\n");
+            else printf("Nenhum aluno reprovado.\n");
+        }
+    }
+}
