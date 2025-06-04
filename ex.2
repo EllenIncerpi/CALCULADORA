@@ -1,0 +1,222 @@
+#include <stdio.h>   
+#include <string.h>  
+
+
+//Função 
+void menu();
+void pausar();
+void limpar_buffer();
+void converterTemperatura();
+void calcularArea();
+void contarTamanhoFrase();
+void verificarPalindromo();
+
+// Funções Auxiliares 
+
+void limpar_buffer() {
+    int c;
+    while ((c = getchar()) != '\n' && c != EOF);
+}
+
+void menu() {
+    printf("==== MENU PRINCIPAL ====\n");
+    printf("1 - Converter Temperatura (Celsius <-> Fahrenheit)\n");
+    printf("2 - Calcular Area\n");
+    printf("3 - Contar Tamanho da Frase\n");
+    printf("4 - Verificar Palindromo\n");
+    printf("0 - Sair\n");
+}
+
+void pausar() {
+    printf("Pressione ENTER para continuar...\n");
+    limpar_buffer();
+}
+
+int main() {
+    int opcao;
+
+    do {
+        menu();
+        printf("\n========================\n");
+        printf("Escolha uma opcao: ");
+        scanf("%d", &opcao);
+        limpar_buffer(); // Limpa o Enter que fica no buffer após o scanf
+
+        switch (opcao) {
+            case 1:
+                converterTemperatura();
+                break;
+            case 2:
+                calcularArea();
+                break;
+            case 3:
+                contarTamanhoFrase();
+                break;
+            case 4:
+                verificarPalindromo();
+                break;
+            case 0:
+                printf("Saindo da calculadora... Ate mais!\n");
+                break;
+            default:
+                printf("Opcao invalida. Por favor, escolha uma opcao valida.\n");
+                break;
+        }
+
+        if (opcao != 0) {
+            pausar();
+        }
+    } while (opcao != 0);
+
+    return 0;
+}
+
+
+// 1- Converte temperaturas entre Celsius e Fahrenheit
+void converterTemperatura() {
+    int subOpcao;
+    float temperatura, resultado;
+
+    printf("\n--- Conversao de Temperatura ---\n");
+    printf("1 - Celsius para Fahrenheit\n");
+    printf("2 - Fahrenheit para Celsius\n");
+    printf("Escolha uma opcao: ");
+    scanf("%d", &subOpcao);
+    limpar_buffer();
+
+    switch (subOpcao) {
+        case 1:
+            printf("Digite a temperatura em Celsius (°C): "); // Unidade adicionada
+            scanf("%f", &temperatura);
+            limpar_buffer();
+            resultado = temperatura * 1.8 + 32;
+            printf("%.2f °C equivalem a %.2f °F.\n", temperatura, resultado); // Unidades adicionadas
+            break;
+        case 2:
+            printf("Digite a temperatura em Fahrenheit (°F): "); // Unidade adicionada
+            scanf("%f", &temperatura);
+            limpar_buffer();
+            resultado = (temperatura - 32) / 1.8;
+            printf("%.2f °F equivalem a %.2f °C.\n", temperatura, resultado); // Unidades adicionadas
+            break;
+        default:
+            printf("Opcao invalida para conversao de temperatura.\n");
+            break;
+    }
+}
+
+// 2- Calcula a área de diferentes figuras geométricas
+void calcularArea() {
+    char subOpcaoArea;
+    float base, altura, raio, area;
+    const float PI = 3.14159;
+
+    printf("\n--- Calculo de Area ---\n");
+    printf("A - Triangulo - (base × altura / 2)\n ");
+    printf("B - Retangulo - (base × altura) \n");
+    printf("C - Circulo -  (π × raio²)\n");
+    printf("Escolha uma opcao (A, B ou C): ");
+    scanf(" %c", &subOpcaoArea);
+    limpar_buffer();
+    
+    // O seu 'switch' estava fora da função 'calcularArea'.
+    // Ele foi movido para dentro da função, no lugar correto.
+    switch (subOpcaoArea) {
+        case 'a': // Triângulo
+        case 'A': // Triângulo
+            printf("Digite a base do triangulo (m): "); // Unidade sugerida: metros (m)
+            scanf("%f", &base);
+            limpar_buffer();
+            printf("Digite a altura do triangulo (m): "); // Unidade sugerida: metros (m)
+            scanf("%f", &altura);
+            limpar_buffer();
+            area = (base * altura) / 2;
+            printf("A area do triangulo eh: %.2f m².\n", area); // Unidade sugerida: metros quadrados (m²)
+            break;
+        case 'b': // Retângulo
+        case 'B': // Retângulo
+            printf("Digite a base do retangulo (m): "); // Unidade sugerida: metros (m)
+            scanf("%f", &base);
+            limpar_buffer();
+            printf("Digite a altura do retangulo (m): "); // Unidade sugerida: metros (m)
+            scanf("%f", &altura);
+            limpar_buffer();
+            area = base * altura;
+            printf("A area do retangulo eh: %.2f m².\n", area); // Unidade sugerida: metros quadrados (m²)
+            break;
+        case 'c': // Círculo
+        case 'C': // Círculo
+            printf("Digite o raio do circulo (m): "); // Unidade sugerida: metros (m)
+            scanf("%f", &raio);
+            limpar_buffer();
+            area = PI * raio * raio;
+            printf("A area do circulo eh: %.2f m².\n", area); // Unidade sugerida: metros quadrados (m²)
+            break;
+        default:
+            printf("Opcao invalida para calculo de area.\n");
+            break;
+    }
+}
+
+// 3- Conta o número de caracteres em uma frase digitada pelo usuário
+void contarTamanhoFrase() {
+    char frase[256];
+
+    printf("\n--- Contar Tamanho da Frase ---\n");
+    printf("Digite a frase: ");
+    fgets(frase, sizeof(frase), stdin);
+
+    
+    int i = 0;
+    while (frase[i] != '\0') { 
+        if (frase[i] == '\n') { 
+            frase[i] = '\0';    
+            break;             
+        }
+        i++; 
+    }
+    
+
+    printf("O tamanho da frase eh: %zu caracteres.\n", strlen(frase));
+}
+
+// 4- Verifica se um texto eh palíndromo
+void verificarPalindromo() {
+    char texto_bruto[256];
+    char limpo[256];
+    int i = 0, j = 0, len;
+
+    printf("\n--- Verificar Palindromo ---\n");
+    printf("Digite um texto (sensivel a maiusculas/minusculas e espacos): ");
+    fgets(texto_bruto, sizeof(texto_bruto), stdin);
+
+    
+    int indice_char = 0;
+    while (texto_bruto[indice_char] != '\0') { 
+        if (texto_bruto[indice_char] == '\n') { 
+            texto_bruto[indice_char] = '\0';
+            break;
+        }
+        indice_char++;
+    }
+    
+
+    // Removedor de espaços
+    for (i = 0; texto_bruto[i] != '\0'; i++) {
+        if (texto_bruto[i] != ' ') { // se um Caractere nao for um espaço
+            limpo[j++] = texto_bruto[i];
+        }
+    }
+    limpo[j] = '\0';
+
+    len = j;
+
+    for (i = 0; i < len / 2; i++) {
+        if (limpo[i] != limpo[len - i - 1]) {
+            printf("'%s' NAO eh um palindromo.\n", texto_bruto);
+            return;
+        }
+    }
+
+    printf("'%s' EH um palindromo!\n", texto_bruto);
+}
